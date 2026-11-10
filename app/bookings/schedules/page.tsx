@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { movieData } from "@/data/movies";
 
 type Movie = {
   id: number;
@@ -13,43 +14,6 @@ type Movie = {
   synopsis: string;
   price?: number;
   studio?: string;
-};
-
-// Dummy movie data
-const movieData = {
-  trending: [
-    {
-      id: 1,
-      title: "Avengers: Infinity War",
-      poster: "images/movies/avenger-infinity-war.png",
-      format: "2D",
-      rating: "13+",
-      duration: "149 min",
-      synopsis: "The Avengers menghadapi ancaman besar yang mengancam alam semesta.",
-    },
-  ],
-  nowPlaying: [
-    {
-      id: 2,
-      title: "Movie Now Playing",
-      poster: "images/movies/movie-now-playing.png",
-      format: "2D",
-      rating: "13+",
-      duration: "120 min",
-      synopsis: "Film yang sedang tayang di bioskop.",
-    },
-  ],
-  comingSoon: [
-    {
-      id: 3,
-      title: "Movie Coming Soon",
-      poster: "images/movies/movie-coming-soon.png",
-      format: "2D",
-      rating: "SU",
-      duration: "110 min",
-      synopsis: "Film yang akan segera tayang.",
-    },
-  ],
 };
 
 type Showtime = {
