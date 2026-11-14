@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { movieData } from "@/data/movies";
@@ -21,7 +21,7 @@ type Showtime = {
     studio: string;
 };
 
-export default function SchedulesPage() {
+function ScheduleContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const movieId = Number(searchParams.get("id"));
@@ -39,8 +39,7 @@ export default function SchedulesPage() {
     const dates = ["10 Nov", "11 Nov", "12 Nov", "13 Nov"];
 
     const assignedStudio = selectedMovie
-        ? selectedMovie.studio ||
-          `Studio ${((selectedMovie.id - 1) % 6) + 1}`
+        ? selectedMovie.studio || `Studio ${((selectedMovie.id - 1) % 6) + 1}`
         : "Studio 1";
     const showtimes: Showtime[] = [
         { time: "09:00", studio: assignedStudio },
@@ -124,7 +123,7 @@ export default function SchedulesPage() {
                 <div className="movie-summary-card flex items-center gap-5 p-5 rounded-xl mb-10">
                     <img
                         id="movie-poster"
-                        src={`/${selectedMovie.poster.replace(/^\/+/, "")}`}
+                        src={`/${selectedMovie.poster.replace(/^assets\//, "").replace(/^\/+/, "")}`}
                         alt={selectedMovie.title}
                         className="w-28 h-40 object-cover rounded-lg"
                     />
@@ -225,5 +224,13 @@ export default function SchedulesPage() {
 
             </section>
         </main>
+    );
+}
+
+export default function SchedulesPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+            <ScheduleContent />
+        </Suspense>
     );
 }
