@@ -8,6 +8,13 @@
       "when": 1794912414105,
       "tag": "0000_heavy_argent",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1794993681665,
+      "tag": "0001_nappy_living_lightning",
+      "breakpoints": true
     }
   ]
 }
