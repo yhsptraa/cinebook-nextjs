@@ -77,159 +77,136 @@ function ScheduleContent() {
 
     if (!selectedMovie) {
         return (
-            <main className="min-h-screen flex items-center justify-center px-6">
+            <div className="min-h-[70vh] flex items-center justify-center px-6">
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold mb-3">
+                    <h2 className="text-2xl font-bold mb-3 text-[#302326]">
                         Movie not found
                     </h2>
-                    <p className="text-gray-500 mb-6">
+                    <p className="text-[#77666a] mb-6">
                         The movie you are looking for is unavailable.
                     </p>
                     <Link
                         href="/"
-                        className="inline-block px-6 py-3 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition">
+                        className="inline-block px-6 py-3 rounded-lg bg-[#8b1e3f] text-[#ffffff] hover:bg-[#701730] transition">
                         Back to Home
                     </Link>
                 </div>
-            </main>
+            </div>
         );
     }
 
     return (
-        <main
-            id="main-container"
-            className="min-h-screen w-full">
-            {/* Header */}
-            <header
-                id="header-container"
-                className="w-full">
-                <nav
-                    id="navbar-container"
-                    className="max-w-5xl mx-auto px-6 py-5">
-                    <Link
-                        href="/"
-                        className="logo inline-block font-semibold hover:opacity-70 transition">
-                        Back
-                    </Link>
-                </nav>
-            </header>
-            {/* Schedule Section */}
-            <section className="schedule-section max-w-3xl mx-auto px-6 py-8">
-                {/* Title */}
-                <h2 className="page-title text-3xl font-bold mb-8">
-                    Select schedule
-                </h2>
-                {/* Movie Summary Card */}
-                <div className="movie-summary-card flex items-center gap-5 p-5 rounded-xl mb-10">
-                    <img
-                        id="movie-poster"
-                        src={`/${selectedMovie.poster.replace(/^assets\//, "").replace(/^\/+/, "")}`}
-                        alt={selectedMovie.title}
-                        className="w-28 h-40 object-cover rounded-lg"
-                    />
-                    <div className="movie-info">
-                        <h3
-                            id="movie-title"
-                            className="text-xl font-bold mb-2">
-                            {selectedMovie.title}
-                        </h3>
-                        <p
-                            id="movie-genre"
-                            className="movie-genre text-sm mb-3">
-                            {selectedMovie.rating || "R13+"}
-                            {" • "}
-                            {selectedMovie.duration || "120 min"}
-                        </p>
-                        <p className="movie-price text-sm">
-                            Price:{" "}
-                            <span
-                                id="movie-price"
-                                className="font-semibold">
-                                Rp {price.toLocaleString("id-ID")}
+        <section className="max-w-3xl mx-auto px-6 py-8">
+            {/* Title */}
+            <h2 className="text-3xl font-bold mb-8 text-[#302326]">
+                Select schedule
+            </h2>
+            {/* Movie Summary Card */}
+            <div className="flex items-center gap-5 p-5 rounded-xl mb-10 bg-[#ffffff] border border-[#e4d6d3] shadow-[0_0.35em_1.25em_rgba(75,37,46,0.14)]">
+                <img
+                    id="movie-poster"
+                    src={`/${selectedMovie.poster.replace(/^assets\//, "").replace(/^\/+/, "")}`}
+                    alt={selectedMovie.title}
+                    className="w-28 h-40 object-cover rounded-lg"
+                />
+                <div>
+                    <h3
+                        id="movie-title"
+                        className="text-xl font-bold mb-2 text-[#302326]">
+                        {selectedMovie.title}
+                    </h3>
+                    <p
+                        id="movie-genre"
+                        className="text-sm mb-3 text-[#77666a]">
+                        {selectedMovie.rating || "R13+"}
+                        {" • "}
+                        {selectedMovie.duration || "120 min"}
+                    </p>
+                    <p className="text-sm text-[#302326]">
+                        Price:{" "}
+                        <span
+                            id="movie-price"
+                            className="font-semibold">
+                            Rp {price.toLocaleString("id-ID")}
+                        </span>
+                        {" / ticket"}
+                    </p>
+                </div>
+            </div>
+            {/* Select Date */}
+            <div className="mb-8">
+                <p className="font-semibold mb-4 text-[#302326]">
+                    Select date
+                </p>
+                <div
+                    id="date-list"
+                    className="flex flex-wrap gap-3">
+                    {dates.map((date) => (
+                        <button
+                            key={date}
+                            type="button"
+                            className={`px-5 py-3 rounded-lg border transition ${
+                                selectedDate === date
+                                    ? "bg-[#8b1e3f] text-[#ffffff] border-[#8b1e3f]"
+                                    : "bg-[#ffffff] text-[#302326] border-[#e4d6d3] hover:border-[#c5afab]"
+                            }`}
+                            onClick={() => setSelectedDate(date)}>
+                            {date}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            {/* Select Showtime */}
+            <div className="mb-10">
+                <p className="font-semibold mb-4 text-[#302326]">
+                    Select showtime
+                </p>
+                <div
+                    id="time-list"
+                    className="flex flex-wrap gap-3">
+                    {showtimes.map((item) => (
+                        <button
+                            key={item.time}
+                            type="button"
+                            className={`min-w-24 px-5 py-3 rounded-lg border transition text-left ${
+                                selectedTime?.time === item.time
+                                    ? "bg-[#8b1e3f] text-[#ffffff] border-[#8b1e3f]"
+                                    : "bg-[#ffffff] text-[#302326] border-[#e4d6d3] hover:border-[#c5afab]"
+                            }`}
+                            onClick={() => setSelectedTime(item)}>
+                            <span className="block font-semibold">
+                                {item.time}
                             </span>
-                            {" / ticket"}
-                        </p>
-                    </div>
-                </div>
-                {/* Select Date */}
-                <div className="option-group mb-8">
-                    <p className="option-title font-semibold mb-4">
-                        <i className="fa-regular fa-calendar mr-2"></i>
-                        Select date
-                    </p>
-                    <div
-                        id="date-list"
-                        className="button-list flex flex-wrap gap-3">
-                        {dates.map((date) => (
-                            <button
-                                key={date}
-                                type="button"
-                                className={`opt-btn px-5 py-3 rounded-lg border transition ${
-                                    selectedDate === date
-                                        ? "selected bg-blue-600 text-white border-blue-600"
-                                        : "border-gray-300 hover:border-blue-500"
-                                }`}
-                                onClick={() => setSelectedDate(date)}>
-                                {date}
-                            </button>
-                        ))}
-                    </div>
-                </div>
-                {/* Select Showtime */}
-                <div className="option-group mb-10">
-
-                    <p className="option-title font-semibold mb-4">
-                        <i className="fa-regular fa-clock mr-2"></i>
-                        Select showtime
-                    </p>
-                    <div
-                        id="time-list"
-                        className="button-list flex flex-wrap gap-3">
-                        {showtimes.map((item) => (
-                            <button
-                                key={item.time}
-                                type="button"
-                                className={`opt-btn min-w-24 px-5 py-3 rounded-lg border transition ${
+                            <small
+                                className={`text-xs ${
                                     selectedTime?.time === item.time
-                                        ? "selected bg-blue-600 text-white border-blue-600"
-                                        : "border-gray-300 hover:border-blue-500"
-                                }`}
-                                onClick={() => setSelectedTime(item)}>
-                                <span className="block font-semibold">
-                                    {item.time}
-                                </span>
-                                <small
-                                    className={`text-xs ${
-                                        selectedTime?.time === item.time
-                                            ? "text-blue-100"
-                                            : "text-gray-400"
-                                    }`}>
-                                    {item.studio}
-                                </small>
-                            </button>
-                        ))}
-                    </div>
+                                        ? "text-[#f5dde5]"
+                                        : "text-[#77666a]"
+                                }`}>
+                                {item.studio}
+                            </small>
+                        </button>
+                    ))}
                 </div>
-                {/* Proceed Button */}
-                <button
-                    id="next-button"
-                    type="button"
-                    disabled={!selectedDate || !selectedTime}
-                    onClick={handleNext}
-                    className="submit-btn w-full py-4 rounded-lg font-semibold transition disabled:opacity-50 disabled:cursor-not-allowed">
-                    Proceed to select seats
-                    {" "}
-                    <i className="fa-solid fa-arrow-right ml-2"></i>
-                </button>
-
-            </section>
-        </main>
+            </div>
+            {/* Proceed Button */}
+            <button
+                id="next-button"
+                type="button"
+                disabled={!selectedDate || !selectedTime}
+                onClick={handleNext}
+                className="w-full py-4 rounded-lg font-semibold transition bg-[#8b1e3f] text-[#ffffff] hover:bg-[#701730] disabled:bg-[#f5eee6] disabled:text-[#a99b9e] disabled:cursor-not-allowed">
+                Proceed to select seats
+            </button>
+        </section>
     );
 }
 
 export default function SchedulesPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+        <Suspense fallback={ 
+            <div className="min-h-screen flex items-center justify-center text-[#77666a]">Loading...</div>
+        }>
             <ScheduleContent />
         </Suspense>
     );
