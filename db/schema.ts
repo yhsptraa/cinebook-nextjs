@@ -40,7 +40,7 @@ export const booking_seats = mysqlTable("booking_seats", {
     booking_id: int("booking_id").references(() => bookings.id).notNull(),
     seat_id: int("seat_id").references(() => seats.id).notNull(),
     price: decimal("price", { precision: 12, scale: 2 }).notNull()
-})
+});
 
 export const schedules = mysqlTable("schedules", {
     id: int("id").autoincrement().primaryKey(),
