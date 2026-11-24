@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^7.0.8",
-    "@tailwindcss/postcss": "^4.3.5",
     "clsx": "^2.1.1",
     "data-fns": "^1.1.0",
     "dotenv": "^18.0.10",
@@ -27,6 +26,7 @@
     "zustand": "^5.1.0"
   },
   "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
